@@ -74,10 +74,10 @@ def remove_stopwords(article: str, extra_words: list, exclude_words: list):
     
     return article_without_stopwords
 
-def prepare_df(df, extra_words = [], exclude_words = []):
+def prepare_df(df, column, extra_words = [], exclude_words = []):
     """Adds columns for cleaned, stemmed, and lemmatized data in dataframe """
     # Create cleaned data column of content
-    df['clean'] = df.original.apply(basic_clean).apply(tokenize).apply(remove_stopwords,
+    df['clean'] = df[column].apply(basic_clean).apply(tokenize).apply(remove_stopwords,
                                                        extra_words = extra_words,
                                                        exclude_words = exclude_words)
     
