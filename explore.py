@@ -3,6 +3,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import json
+import matplotlib as mpl
 
 
 def word_counts(train):
@@ -28,4 +29,16 @@ def word_counts(train):
               .apply(lambda s: s.astype(int)))
 
     return word_counts
-    
+
+
+def common_words(word_counts):
+    for column in word_counts.drop(columns='all'):
+    # axis=1 in .apply means row by row
+        (word_counts.sort_values(by='all', ascending=False)
+        .head(20).apply(lambda row: row / row['all'], axis=1).drop(columns='all')
+        .sort_values(by= column).plot.barh(stacked=True, width=1, ec='black'))
+        plt.title(f'% of  the most common 20 {column} README words')
+        plt.legend(bbox_to_anchor= (1.03,1))
+
+        plt.gca().xaxis.set_major_formatter(mpl.ticker.FuncFormatter('{:.0%}'.format))
+        plt.show()
