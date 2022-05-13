@@ -75,7 +75,8 @@ def remove_stopwords(article: str, extra_words: list, exclude_words: list):
     return article_without_stopwords
 
 def prepare_df(df, column, extra_words = [], exclude_words = []):
-    """Adds columns for cleaned, stemmed, and lemmatized data in dataframe """
+    """Adds columns for cleaned, stemmed, and lemmatized data in dataframe. 
+    Also adds in columns calculating the lengths and word counts. """
     # Create cleaned data column of content
     df['clean'] = df[column].apply(basic_clean).apply(tokenize).apply(remove_stopwords,
                                                        extra_words = extra_words,
@@ -91,6 +92,16 @@ def prepare_df(df, column, extra_words = [], exclude_words = []):
                                                        extra_words = extra_words,
                                                        exclude_words = exclude_words)
     
+    # Calculates total length of readme based on number of characters
+    df['original_length'] = df[column].str.len()
+    df['stem_length'] = df.stemmed.str.len()
+    df['lem_length'] = df.lemmatized.str.len()
+
+    # Calculates total number of words (splitting up by whitespace)
+    df['original_word_count'] = df[column].str.split().str.len()
+    df['stemmed_word_count'] = df.stemmed.str.split().str.len()
+    df['lemmatized_word_count'] = df.lemmatized.str.split().str.len()
+
     return df
     
     
