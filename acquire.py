@@ -15,6 +15,7 @@ import json
 from typing import Dict, List, Optional, Union, cast
 import requests
 from github import Github
+import pandas as pd
 
 from env import github_token, github_username
 
@@ -257,7 +258,7 @@ def scrape_github_data() -> List[Dict[str, str]]:
     """
     return [process_repo(repo) for repo in REPOS]
 
-def get_repo_list(query='data science', sort_method='stars', how_many = 100):
+def get_repo_list(query='machine learning', sort_method='stars', how_many = 50):
     """Return a list of repositories based on search query and sorted by sort method"""
     
     g = Github(github_token)
@@ -269,6 +270,25 @@ def get_repo_list(query='data science', sort_method='stars', how_many = 100):
         repo_list.append(repo.full_name)
         
     return repo_list
+
+def get_repo_data():
+    """Acquires scraped data either from cached data.json file or using the Github API"""
+    
+    # Checks if cache exists
+    if os.path.exists('data.json'):
+        # Read data from json into Pandas Dataframe
+        return pd.read_json('data.json')
+    
+    else:
+        # Data was scraped using the acquire script from Zach
+        scraped_data = scrape_github_data()
+
+        # Scrapped data saved to dataframe and json
+        data = pd.DataFrame(scraped_data)
+
+        data.to_json('data.json')
+        
+        return data
 
 if __name__ == "__main__":
     data = scrape_github_data()
