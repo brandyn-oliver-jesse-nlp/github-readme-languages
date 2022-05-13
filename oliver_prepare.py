@@ -1,25 +1,14 @@
 import unicodedata
 import re
-import json
 
 import nltk
 from nltk.tokenize.toktok import ToktokTokenizer
 from nltk.corpus import stopwords
 from sklearn.model_selection import train_test_split
 import pandas as pd
-import acquire as a
-#from textblob import TextBlob
 
-
-#import
 import warnings
 warnings.filterwarnings("ignore")
-
-
-
-
-
-
 
 
 def basic_clean (string):
@@ -43,7 +32,6 @@ def basic_clean (string):
 
     return string
 
-
 def tokenize (string):
     '''
     take in a string and tokenize all the words in the string
@@ -55,7 +43,6 @@ def tokenize (string):
     string = tokenizer.tokenize(string, return_str = True)
     return string
 
-
 def stem (string):
     '''
      takes in a text and return the text after applying stemming to all the words.
@@ -66,7 +53,6 @@ def stem (string):
     stems = [ps.stem(word) for word in string.split()]
     text_stemmed = ' '.join(stems)
     return text_stemmed 
-
 
 
 def lemmatize (text):
@@ -83,7 +69,6 @@ def lemmatize (text):
     
     return text_lemmatized
     
-
 
 def remove_stopwords (string, extra_words= [], exclude_words=[]):
     '''
@@ -115,7 +100,6 @@ def remove_stopwords (string, extra_words= [], exclude_words=[]):
     return string_without_stopwords
 
 
-
 def prepare_data(df, column, extra_words=[], exclude_words=[]):
     '''
     This function take in a df and the string name for a text column with 
@@ -134,8 +118,6 @@ def prepare_data(df, column, extra_words=[], exclude_words=[]):
     df['lemmatized'] = df['clean'].apply(lemmatize)
     
     return df
-
-
 
 
 def miss_dup_values(df):
@@ -169,18 +151,6 @@ def miss_dup_values(df):
 
     return mis_val_table_ren_columns
 
-
-# def remove_nonenglish (df):
-#     '''
-#     takes in df and 1 column to check if the text is in englis if not that row is going to be remove
-#     '''
-#     for n in range (0, len(df)):
-#         text = df.readme_contents[n]
-#         lang = TextBlob(text)
-#         if lang.detect_language() != 'en':
-#             df =df.drop([n])
-#     return df.reset_index(drop=True)
-
 def top_n_target(df,target,  n):
     '''
     takes in a df , target and the number of top target that you want
@@ -199,33 +169,23 @@ def prepare_mf (df,extra_words=[], exclude_words=[] ):
     takes in a df and all the rows with missing information, non English text,
     and then clean, tokenize, stemming, lemmatize
     '''
-    
-    
-    
     #remove duplicates 
     df =df.drop_duplicates()
     
     #removing missing values
     df = df.dropna(axis=0).reset_index(drop=True)
     
-    
-
     #replace Jupyter notebook by python
     df['language'].replace('Jupyter Notebook', 'Python', inplace=True )
-    
-        
-        
+          
     #get the top n languages
     df = top_n_target(df, 'language', 5).reset_index(drop=True)
     
     #use my prepare function to  clean, tokenized, stemming, lemmatize
     df =prepare_data(df, 'readme_contents', extra_words= extra_words, exclude_words=exclude_words)
 
-
-
     return df
     
-
 
 def split_data(df, target):
     '''
