@@ -94,19 +94,6 @@ def prepare_df(df, column, extra_words = [], exclude_words = []):
     return df
     
     
-def create_prepared_news_df(extra_words =[], exclude_words = []):
-    """Run this function to generate a prepared news article dataframe with cleaned, stemmed, and lemmatized data"""
-    news_df = pd.DataFrame(acquire.get_news_articles())
-    
-    return prepare_df(news_df, extra_words, exclude_words)
-    
-def create_prepared_blog_df(extra_words =[], exclude_words = []):
-    """Run this function to generate a prepared Codeup Blog dataframe with cleaned, stemmed, and lemmatized data"""
-
-    codeup_df = pd.DataFrame(acquire.get_blog_articles())
-    
-    return prepare_df(codeup_df, extra_words, exclude_words)
-    
     
 def train_validate_test_split(df, target, seed=123):
     '''
