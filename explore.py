@@ -122,3 +122,41 @@ def word_cloud(train, language):
     plt.imshow(img)
     plt.axis('off')
     
+def plot_bigrams(df, category, plot_bar = True, plot_wordcloud = False):
+    """ Accepts word count dataframe and outputs plots of top 20 bigrams and wordcloud based on category.
+    Returns top 20 category bigrams"""
+    # Generate bigrams
+    bigrams = list(nltk.ngrams(all_words_df.T[category]['all_words'].split(),2))
+    # Take top 20
+    top_20_cat_bigrams = pd.Series(bigrams).value_counts().head(20)
+    
+    if plot_bar:
+        # Plot bar chart
+        top_20_cat_bigrams.sort_values().plot.barh(color='orange', width=.9, figsize=(10, 6))
+
+        # Ensure only integer values for x axis
+        plt.xticks(range(top_20_cat_bigrams.sort_values().max()+1))
+
+        plt.title(f'20 Most frequently occuring {category} bigrams')
+        plt.ylabel('Bigram')
+        plt.xlabel('# Occurrences')
+
+        # make the labels pretty
+        ticks, _ = plt.yticks()
+        labels = top_20_cat_bigrams.reset_index()['index'].apply(lambda t: t[0] + ' ' + t[1])
+        _ = plt.yticks(ticks, labels)
+        plt.show()
+    
+    if plot_wordcloud:
+        # Plot wordcloud
+        data = {k[0] + ' ' + k[1]: v for k, v in top_20_cat_bigrams.to_dict().items()}
+        img = WordCloud(background_color='white', width=800, height=400).generate_from_frequencies(data)
+        plt.figure(figsize=(8, 4))
+        plt.imshow(img)
+        plt.axis('off')
+        plt.title(category)
+        plt.show()
+        
+    return top_20_cat_bigrams
+
+    
