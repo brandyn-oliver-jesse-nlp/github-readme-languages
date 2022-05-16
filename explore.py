@@ -90,3 +90,19 @@ def ngrams_wordcloud (text, title,  n=2, top = 20):
     plt.title(f'Top {top} most common {title} ngrams where n={n}')
     #plt.tight_layout()
     plt.show()
+
+
+def unique_counts(word_counts):
+    '''
+    This function takes our word_counts dataframe and finds the number of uniques to each language and returns them as their own dataframes. 
+    '''
+    # Adding a column for each language with 1 or 0 (str) to represent if it is unique to that language
+    word_counts['unique_p'] = np.where(word_counts['all'] == word_counts['python'], '1', '0')
+    word_counts['unique_j'] = np.where(word_counts['all'] == word_counts['java'], '1', '0')
+    word_counts['unique_c'] = np.where(word_counts['all'] == word_counts['c++'], '1', '0')
+    # Getting separate df's for these unique words
+    unique_p = word_counts[['python']][word_counts.unique_p == '1']
+    unique_j = word_counts[['java']][word_counts.unique_j == '1']
+    unique_c = word_counts[['c++']][word_counts.unique_c == '1']
+    # returning the three dataframes
+    return unique_p, unique_j, unique_c
