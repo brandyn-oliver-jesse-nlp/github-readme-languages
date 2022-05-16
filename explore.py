@@ -106,3 +106,19 @@ def unique_counts(word_counts):
     unique_c = word_counts[['c++']][word_counts.unique_c == '1']
     # returning the three dataframes
     return unique_p, unique_j, unique_c
+
+
+def word_cloud(train, language):
+    '''
+    This function takes in our dataframe and a string of which language you want to specify for. Outputs a WordCloud of the lemmatized text for that language.
+    '''
+    # Getting our specified language words
+    words = (' '.join(train.lemmatized[train.language == language]))
+    # Making our WordCloud image object
+    img = WordCloud(background_color='white').generate(words)
+    # Displaying the WordCloud image
+    plt.figure(figsize=(10,5))
+    plt.title(f'Word Cloud for {language}')
+    plt.imshow(img)
+    plt.axis('off')
+    
