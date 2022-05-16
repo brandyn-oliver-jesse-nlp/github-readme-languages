@@ -26,7 +26,7 @@ Table of Contents
 
 -------------------
 
-Perform statistical analysis on data collected via web-scraping of the GitHub site. After collecting README files from 150 repositories from GitHub we predicted the primary programming language used in each project. We used the search term "machine learning" and sorted by highest starts to acquire quality repositories. 50 repositories from three languages - Java, C++, and Python - were acquired in order to analyze a balanced dataset.
+We collected README files from 150 repositories on GitHub and predicted the primary programming language used in each project. We used the search term "machine learning" and sorted by highest starts to acquire quality repositories. 50 repositories from three languages - Java, C++, and Python - were acquired in order to analyze a balanced dataset.
 
  
 This project involves textual data cleaning, wrangling and exploration, as well as modeling and validation/verification of modeling results. We leveraged natural language processing techniques to garner insights and to generate features for classification models.
