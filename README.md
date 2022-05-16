@@ -237,9 +237,6 @@ Note: We used the PyGitHub library to acquire a list of repositories from Github
 ### VIII. Next Steps
 
 - Test additional models on the data with different hyperparameters and algorithm types. Deep learning has been applied in this domain successfully and can provide a more flexible model.
-<<<<<<< HEAD
-- Leverage additional Natural Language Processing techniques for analyzing the text, such as topic modeling. We could look at words on a sentence level as well rather than the overall document. 
-=======
 - Leverage additional Natural Language Processing techniques for analyzing the text, such as topic modeling. We could look at words on a sentence level as well rather than the overall document.
 - Including more languages, a larger number of READMEs and different categories of topics we could test our bag of words, unique words, and outcomes to see if the NLP model works on the niche set of parameters we utilized or has broader implications for the coding languages themselves. 
 - Varying the ‘star’ ranking and comparing the predicted outcomes by language could give indication to what degree of unique language makes for a better overall README quality, and if there is a threshold where it becomes too cumbersome.  
