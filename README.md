@@ -200,8 +200,10 @@ Note: We used the PyGitHub library to acquire a list of repositories from Github
 
 - A repository's language can be predicted with accuracies much greater than the baseline's using natural language processing techniques and a classification model. 
 - Of the 80 models tested the best performing one was the Decision Tree Classifier with a max depth setting of 2 and utilizing the count vectorizer (bag of words) with unigrams only. This model was able to predict the repository language with 60% accuracy, an improvement of 27% over the baseline.
-- Many of the models appeared to strongly overfit as evidenced by the large decrease in accuracy from train to validate. 
-
+- Overall only 22 of 80 models exhibited a dropoff in train to validate accuracy of less than 10%, indicating most models overfit to the train data. The only algorithm with decent performance without overfitting was the Decision Tree Classifier. Multinomial Naive Bayes didn't overfit but accuracy was around 33%. Performance with the Decision Tree Classifier was best with the Count Vectorizer and was identical whether solely unigrams were used vs with bigrams and/or trigrams. This result seems to indicate that unigrams alone are good enough as inputs to the classification model to distinguish between languages.
+- There is a difference in the general length of the READMEs, and there is a statistical significance for two (Java and C++) of the languages compared to the overall mean. At a quick glance we can see that Python does have the largest word count on average, but this stems from having a number of READMEs that exceed the average word count generally. Python was still determined to not be statistically significant compared to the average readme length, likely due to its large standard deviation of word lengths. 
+- The overall most common words tend to relate with installation of libraries or packages for the coding languages, and is heavily skewed by Python in terms of frequency. 
+- There are a lot of unique lemmatized 'words' for each language, with Python having the highest amount in this capacity by quite a margin. (12,000 + compared to ~2500 for Java or C++)
  
 
  
@@ -209,6 +211,9 @@ Note: We used the PyGitHub library to acquire a list of repositories from Github
 ### Next Steps
 
 - Test additional models on the data with different hyperparameters and algorithm types. Deep learning has been applied in this domain successfully and can provide a more flexible model.
-- Leverage additional Natural Language Processing techniques for analyzing the text, such as topic modeling. We could look at words on a sentence level as well rather than the overall document. 
+- Leverage additional Natural Language Processing techniques for analyzing the text, such as topic modeling. We could look at words on a sentence level as well rather than the overall document.
+- Including more languages, a larger number of READMEs and different categories of topics we could test our bag of words, unique words, and outcomes to see if the NLP model works on the niche set of parameters we utilized or has broader implications for the coding languages themselves. 
+- Varying the ‘star’ ranking and comparing the predicted outcomes by language could give indication to what degree of unique language makes for a better overall README quality, and if there is a threshold where it becomes too cumbersome.  
+
 
 
