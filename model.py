@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import nltk
+import os
 
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.model_selection import train_test_split
@@ -117,13 +118,16 @@ def model_words(vectorizer, class_model, ngrams_range_value, train, validate, ta
     return train_class_report, validate_class_report, feature_names, feature_importances
 
 def model_multiple(vectorizers, class_models, ngram_range_values, train, validate, target, print_results_param=False):
-    """Performs classification modeling of inputed text data and returns Pandas DataFrame with the performance results
+    """Performs classification modeling of inputed text data and returns Pandas DataFrame with the performance results. As this can be a time consuming process will read in previously generated results from csv if available.
     vectorizers: list of vectorizers such as tf-idf to use
     class_models: list classification models to use
     ngram_range_values: list of tuples indicating ngrams to use in vectorizer
     train, validate: datasets
     target: the target - in this case 'language'
     print_results_param: whether to print the classification report"""
+    
+    if os.path.exists('model_results.csv'):
+        return pd.read_csv('model_results.csv', index_col='model')
     
     train_accuracies = []
     validate_accuracies = []
