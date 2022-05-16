@@ -6,11 +6,10 @@
 
 -------------------
 
-Perform statistical analysis on data collected via web-scraping of the GitHub site. After collecting over _____ repositories from GitHub we predicted the primary programming language used in each project.
+Perform statistical analysis on data collected via web-scraping of the GitHub site. After collecting README files from 150 repositories from GitHub we predicted the primary programming language used in each project. We used the search term "machine learning" and sorted by highest starts to acquire quality repositories. 50 repositories from three languages - Java, C++, and Python - were acquired in order to analyze a balanced dataset.
 
  
-
-This project involves data cleaning, wrangling and exploration, as well as modeling and validation/verification of modeling results.
+This project involves textual data cleaning, wrangling and exploration, as well as modeling and validation/verification of modeling results. We leveraged natural language processing techniques to garner insights and to generate features for classification models.
 
  
 
@@ -28,7 +27,7 @@ This project involves data cleaning, wrangling and exploration, as well as model
 
                 d. modeling
 
-2. Build and evaluate Classification models to predict the Programming Language used in a given Readme.
+2. Build and evaluate classification models to predict the programming language used in a given Readme.
 
  
 
@@ -36,7 +35,7 @@ This project involves data cleaning, wrangling and exploration, as well as model
 
 --------------
 
-- Make use of NLP to predict programming language based on Readme content.
+- Make use of NLP and classification models to predict programming language of a repository based on Readme content.
 
 - Perform a number of parsing operations to isolate and process key text features - including lemmatization, stemming and removal of stopwords.
 
@@ -76,7 +75,7 @@ Additionally, a set of features were added to the data set:
 
 ----------------
 
-The overall process followed in this project, is as follows:
+The overall process followed in this project is as follows:
 
  
 
@@ -92,17 +91,20 @@ Perform preliminary examination of a number of GitHub projects.
 
 Acquire tokens and permissions to scrape data from the GitHub website.
 
- 
+Prepare the data for exploration and modeling.
+
+Develop questions to explore and generate features for modeling.
+
+Perform machine learning modeling to predict the repository language.
+
+Deliver results in the form of a final notebook, this README, and Google slide deck. 
+
 
 ### 2. Acquire
 
 This is accomplished via the python script named “acquire.py”. The script will use credentials (stored in env.py) to collect data from GitHub.com in various ways
 
-- first, collect a number of "URLs", or Repository names, so that the subsequent acquision function will be able to seek out those repositories.
-
-- store these in ______.json or _____.csv - that way, we would not hit GituHub's page and scrape the same data repeatedly. Moreover, this ensures that subsequent processing executions will consistently use the same repo list, leading to a more reliable and consistent result.
-
-- capture these repository names as a strings in a python list object.
+- First, collect a number of "URLs", or Repository names, so that the subsequent acquisition function will be able to seek out those repositories. Store the names of the repositories in a Python list. 
 
 - Once the list of repositories is collected, use functions from the acquire script to collect the following information from those repositories, including:
 
@@ -111,7 +113,8 @@ This is accomplished via the python script named “acquire.py”. The script wi
                 - actual language of the project
 
                 - contents of the readme for that repository
-
+                
+- store these in data.json - that way, we would not hit GituHub's page and scrape the same data repeatedly. Moreover, this ensures that subsequent processing executions will consistently use the same repo list, leading to a more reliable and consistent result.
 
  
 
@@ -133,7 +136,9 @@ This functionality is stored in the python script "prepare.py". It will perform 
 
 - remove any records where the readme contents were null or empty
 
-- Split the data into 3 datasets - train/test/validate - used in modeling
+- generate additional features for exploration and modeling such as README length and word counts
+
+- split the data into 3 datasets - train/test/validate - used in modeling
 
   - Train: 56% of the data
 
@@ -145,19 +150,22 @@ This functionality is stored in the python script "prepare.py". It will perform 
 
 ### 4. Explore
 
+Answer the following questions using data visualization and statistical testing:
 
+1. What are the most common words in the README files by language?
+2. Does the length of the README file vary by language?
+3. Are bigrams from the README useful for determining which language the repository belongs to?
  
-
-
 
 ### 5. Model
 
-Generate a baseline, against which all models will be evaluated.
+Generate a baseline, against which all models will be evaluated. In this case we have an equal amount of each programming language in the dataset - 50 each of Python, Java, and C++ - so the baseline prediction is 33%.
 
-Compare the models against the baseline and deduce which has the highest overall accuracy scores.
+Each model uses a different combination of vectorizer type (with different values for ngram range), algorithm, and hyperparameter set.
 
-Fit the best performing model on test data.
+Compare the models against the baseline and each other based on the accuracy score from the validate sample. We sorted by ascending dropoff in accuracy from train to validate to guard against choosing an overfit model. 
 
+Test the best performing model on witheld test data.
 
 
 ### 6. Deliver
@@ -184,13 +192,15 @@ Download the ______ file in this repository.
  
 Finally, open the Jupyter notebook titled _______ and execute the code within.
 
- 
+Note: We used the PyGitHub library to acquire a list of repositories from Github to be input into the acquire module. In order to leverage this functionality ensure you have this library installed. Other libraries needed are pandas, numpy, nltk, scipy, sci-kit learn, and matplotlib.
 
+ 
 
 ### Takeaways
 
----------
-
+- A repository's language can be predicted with accuracies much greater than the baseline's using natural language processing techniques and a classification model. 
+- Of the 80 models tested the best performing one was the Decision Tree Classifier with a max depth setting of 2 and utilizing the count vectorizer (bag of words) with unigrams only. This model was able to predict the repository language with 60% accuracy, an improvement of 27% over the baseline.
+- Many of the models appeared to strongly overfit as evidenced by the large decrease in accuracy from train to validate. 
 
  
 
@@ -198,6 +208,7 @@ Finally, open the Jupyter notebook titled _______ and execute the code within.
 
 ### Next Steps
 
-----------
+- Test additional models on the data with different hyperparameters and algorithm types. Deep learning has been applied in this domain successfully and can provide a more flexible model.
+- Leverage additional Natural Language Processing techniques for analyzing the text, such as topic modeling. We could look at words on a sentence level as well rather than the overall document. 
 
 
