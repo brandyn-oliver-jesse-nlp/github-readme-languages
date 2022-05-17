@@ -25,18 +25,18 @@ Table of Contents
 ## I. Project Description
 
 -------------------
-
+<details><summary><i>Click to expand</i></summary>
 We collected README files from 150 repositories on GitHub and predicted the primary programming language used in each project. We used the search term "machine learning" and sorted by highest starts to acquire quality repositories. 50 repositories from three languages - Java, C++, and Python - were acquired in order to analyze a balanced dataset.
 
  
 This project involves textual data cleaning, wrangling and exploration, as well as modeling and validation/verification of modeling results. We leveraged natural language processing techniques to garner insights and to generate features for classification models.
-
+</details>
  
 
 ## II. Project Goals
 
 -------------
-
+<details><summary><i>Click to expand</i></summary>
 1. Create scripts to perform the following:
 
                 a. acquisition of data from GitHub's website
@@ -48,17 +48,17 @@ This project involves textual data cleaning, wrangling and exploration, as well 
                 d. modeling
 
 2. Build and evaluate classification models to predict the programming language used in a given Readme.
-
+</details>
  
 
 ## III. Business Goals
 
 --------------
-
+<details><summary><i>Click to expand</i></summary>
 - Make use of NLP and classification models to predict programming language of a repository based on Readme content.
 
 - Perform a number of parsing operations to isolate and process key text features - including lemmatization, stemming and removal of stopwords.
-
+</details>
  
 
 
@@ -67,7 +67,7 @@ This project involves textual data cleaning, wrangling and exploration, as well 
 ## IV. Data Dictionary
 
 ---------------
-
+<details><summary><i>Click to expand</i></summary>
 | Name |   Datatype   |      Definition    |    Possible Values  |
 | :----- | :----- | :----- | :----- |
 | repo  |     object  | Unique name for the repo |  slash delimited string|
@@ -91,7 +91,7 @@ Additionally, a set of features were added to the data set:
 | original_word_count   | int64        | Total of words of the README                           | numeric            |
 | stemmed_word_count    | int64        | Total of words of the README after stemmed applied     | numeric            |
 | lemmatized_word_count | int64        | Total of words of the README after lemmatized applied  | numeric            |
-
+</details>
 
  
 
@@ -107,7 +107,7 @@ The overall process followed in this project is as follows:
 
 
 --------------
-
+<details><summary><i>Click to expand</i></summary>
 ### 1. Plan
 
 
@@ -179,7 +179,7 @@ Answer the following questions using data visualization and statistical testing:
 1. What are the most common words in the README files by language?
 2. Does the length of the README file vary by language?
 3. Are bigrams from the README useful for determining which language the repository belongs to?
- 
+
 
 ### 5. Model
 
@@ -196,10 +196,10 @@ Test the best performing model on witheld test data.
 
 Present findings via Google slides.
 The slide deck can be found [here.](https://docs.google.com/presentation/d/1b4gRp4zUtTnriJPJs-4TC4Izplj_DkErRSwq5HreIPY/edit?usp=sharing)
-
+</details>
 
 ### VI. To recreate
-
+<details><summary><i>Click to expand</i></summary>
 Simply clone the project locally and create an env.py file in the same folder as the cloned code. The env.py file's format should be as follows:
 
  
@@ -219,28 +219,28 @@ curl -LO https://github.com/brandyn-oliver-jesse-nlp/github-readme-languages/blo
 Finally, open the Jupyter notebook titled final_notebook.ipynb and execute the code within.
 
 Note: We used the PyGitHub library to acquire a list of repositories from Github to be input into the acquire module. In order to leverage this functionality ensure you have this library installed. Other libraries needed are pandas, numpy, nltk, scipy, sci-kit learn, and matplotlib.
-
+</details>
  
 
 ### VII. Takeaways
-
+<details><summary><i>Click to expand</i></summary>
 - A repository's language can be predicted with accuracies much greater than the baseline's using natural language processing techniques and a classification model. 
 - Of the 80 models tested the best performing one was the Decision Tree Classifier with a max depth setting of 2 and utilizing the count vectorizer (bag of words) with unigrams only. This model was able to predict the repository language with 60% accuracy, an improvement of 27% over the baseline.
 - Overall only 22 of 80 models exhibited a dropoff in train to validate accuracy of less than 10%, indicating most models overfit to the train data. The only algorithm with decent performance without overfitting was the Decision Tree Classifier. Multinomial Naive Bayes didn't overfit but accuracy was around 33%. Performance with the Decision Tree Classifier was best with the Count Vectorizer and was identical whether solely unigrams were used vs with bigrams and/or trigrams. This result seems to indicate that unigrams alone are good enough as inputs to the classification model to distinguish between languages.
 - There is a difference in the general length of the READMEs, and there is a statistical significance for two (Java and C++) of the languages compared to the overall mean. At a quick glance we can see that Python does have the largest word count on average, but this stems from having a number of READMEs that exceed the average word count generally. Python was still determined to not be statistically significant compared to the average readme length, likely due to its large standard deviation of word lengths. 
 - The overall most common words tend to relate with installation of libraries or packages for the coding languages, and is heavily skewed by Python in terms of frequency. 
 - There are a lot of unique lemmatized 'words' for each language, with Python having the highest amount in this capacity by quite a margin. (12,000 + compared to ~2500 for Java or C++)
- 
+ </details>
 
  
 
 ### VIII. Next Steps
-
+<details><summary><i>Click to expand</i></summary>
 - Test additional models on the data with different hyperparameters and algorithm types. Deep learning has been applied in this domain successfully and can provide a more flexible model.
 - Leverage additional Natural Language Processing techniques for analyzing the text, such as topic modeling. We could look at words on a sentence level as well rather than the overall document.
 - Including more languages, a larger number of READMEs and different categories of topics we could test our bag of words, unique words, and outcomes to see if the NLP model works on the niche set of parameters we utilized or has broader implications for the coding languages themselves. 
 - Varying the ‘star’ ranking and comparing the predicted outcomes by language could give indication to what degree of unique language makes for a better overall README quality, and if there is a threshold where it becomes too cumbersome.  
-
+</details>
 
 
 
