@@ -16,7 +16,7 @@ Table of Contents
 [2. Data Acquisition](#2-acquire)<br>
 [3. Data Preparation](#3-prepare)<br>
 [4. Data Exploration](#4-explore)<br>
-[5. Modeling & Evaluatio](#5-model)<br>
+[5. Modeling & Evaluation](#5-model)<br>
 [6. Product Delivery](#6-deliver)<br>
 * V. [Project Reproduction](#vi-to-recreate)<br>
 * VI. [Key Takeaway](#vii-takeaways)<br>
@@ -32,6 +32,8 @@ We collected README files from 150 repositories on GitHub and predicted the prim
 
  
 This project involves textual data cleaning, wrangling and exploration, as well as modeling and validation/verification of modeling results. We leveraged natural language processing techniques to garner insights and to generate features for classification models.
+
+Here is a shorter version of our final_notebook.ipynb[here.](https://docs.google.com/presentation/d/1b4gRp4zUtTnriJPJs-4TC4Izplj_DkErRSwq5HreIPY/edit?usp=sharing)
 
 </details>
  
