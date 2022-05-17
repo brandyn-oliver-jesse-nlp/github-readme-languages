@@ -6,6 +6,7 @@ import json
 import matplotlib as mpl
 import nltk
 from wordcloud import WordCloud
+import scipy.stats as stats
 
 
 def word_counts(train):
@@ -48,16 +49,6 @@ def common_words(word_counts):
     plt.legend(bbox_to_anchor= (1.03,1))
 
     plt.gca().xaxis.set_major_formatter(mpl.ticker.FuncFormatter('{:.0%}'.format))
-    plt.show()
-
-
-def word_cloud (text):
-    '''
-    takes in a text and create a wordcloud
-    '''
-    img = WordCloud(background_color='white', width=800, height=600).generate(text)
-    plt.imshow(img)
-    plt.axis('off')
     plt.show()
 
 
@@ -159,4 +150,57 @@ def plot_bigrams(df, category, plot_bar = True, plot_wordcloud = False):
         
     return top_20_cat_bigrams
 
-    
+def hist_plot(train, readme_length):
+    '''
+    This function is create a histogram. Take in a dataframe, a target and a feature
+    '''
+    train[readme_length].plot.hist(bins=100)
+    plt.title('Distribution of Readme Lengths')
+    plt.xlabel('readme length')
+    plt.show()
+
+def bar_plot(train, target, readme_length):
+    '''
+    This function is to create a bar plot. Take in dataframe, a target and a feature
+    '''
+    train.groupby(target)[readme_length].mean().plot.bar()
+    plt.title('Mean Readme Lengths by Language')
+    plt.ylabel('Readme Length')
+    plt.show()
+
+def stat_test(train, readme_length):
+    '''
+    Perform 1 sample t-test comparing mean length of original
+    README file per language to the overall average length (all languages)
+    set the significance level to 0.05
+    '''
+    alpha = 0.05
+    overall_mean_length_readme = train[readme_length].mean()
+    for l in train.language.unique():
+        sample = train[train.language == l]
+        t,p = stats.ttest_1samp(sample[readme_length], overall_mean_length_readme)
+        print(l, round(t,5), p<alpha)
+
+def box_plot(train, target, readme_length):
+    '''
+    Create a boxplot to represent the distributions of the README lengths. Take in a target and a feature
+    '''
+    sns.boxplot(x= target,y = readme_length, data= train)
+    plt.title('DIstribution of README length')
+    plt.ylim(0, 16000)
+
+def top_model_perform(non_overfit_results, yticklabels):
+    '''
+    This function will create a bar chart to show performance of top models and set our baseline at 33%. 
+    Because the data set is balanced among the three classes we have a 1/3 chance of choosing the correct language purely by chance.
+    '''
+    ax=non_overfit_results.plot.barh(stacked=False, width=0.7, ec='black')
+    baseline = 0.33
+    plt.title(f'Accuracy of top models against the baseline\nGreen bar shows the top model performance on test set')
+    plt.legend(bbox_to_anchor= (1.03,1))
+    plt.axvline(baseline, c='red', linestyle = '--')
+    plt.gca().xaxis.set_major_formatter(mpl.ticker.FuncFormatter('{:.0%}'.format))
+    plt.ylabel('Model Name (vectorizer, algorithm, ngram range)')
+    plt.xlabel('Accuracy Score')
+    ax.set_yticklabels(yticklabels[:5])
+    plt.show()  
