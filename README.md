@@ -1,4 +1,4 @@
-# GITHUB README LANGUAGE CLASSIFCATION
+# Github Readme Language Classification
 
 ### This repository contains code for the natural language processing project completed as part of the Codeup Data Science curriculum.
  
