@@ -276,10 +276,13 @@ def get_repo_data():
     
     # Checks if cache exists
     if os.path.exists('data.json'):
+        print("Reading data from cache")
         # Read data from json into Pandas Dataframe
         return pd.read_json('data.json')
     
     else:
+        print("Acquiring new data from Github")
+        
         # Data was scraped using the acquire script from Zach
         scraped_data = scrape_github_data()
 
