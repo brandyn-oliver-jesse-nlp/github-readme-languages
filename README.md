@@ -31,7 +31,7 @@ Table of Contents
 We collected README files from 150 repositories on GitHub and predicted the primary programming language used in each project. We used the search term "machine learning" and sorted by highest stars to acquire quality repositories. 50 repositories from three languages - Java, C++, and Python - were acquired in order to analyze a balanced dataset.
 
  
-This project involves textual data cleaning, wrangling and exploration, as well as modeling and validation/verification of modeling results. We leveraged natural language processing techniques to garner insights and to generate features for classification models. Multiple classification models were trained and the best model, a decision tree classifier, exceeded baseline accuracy by 27%.
+This project involves textual data cleaning, wrangling and exploration, as well as modeling and validation/verification of modeling results. We leveraged natural language processing techniques to garner insights and to generate features for classification models. Multiple classification models were trained and the best model, a decision tree classifier, exceeded baseline accuracy on the test set by 27%.
 
 Slides based on the findings documented in our final_notebook.ipynb are located [here.](https://docs.google.com/presentation/d/1b4gRp4zUtTnriJPJs-4TC4Izplj_DkErRSwq5HreIPY/edit?usp=sharing)
 
