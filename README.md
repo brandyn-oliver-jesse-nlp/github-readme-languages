@@ -33,7 +33,7 @@ We collected README files from 150 repositories on GitHub and predicted the prim
  
 This project involves textual data cleaning, wrangling and exploration, as well as modeling and validation/verification of modeling results. We leveraged natural language processing techniques to garner insights and to generate features for classification models.
 
-Here is a shorter version of our final_notebook.ipynb[here.](https://docs.google.com/presentation/d/1b4gRp4zUtTnriJPJs-4TC4Izplj_DkErRSwq5HreIPY/edit?usp=sharing)
+Slides based on the findings documented in our final_notebook.ipynb are located [here.](https://docs.google.com/presentation/d/1b4gRp4zUtTnriJPJs-4TC4Izplj_DkErRSwq5HreIPY/edit?usp=sharing)
 
 </details>
  
